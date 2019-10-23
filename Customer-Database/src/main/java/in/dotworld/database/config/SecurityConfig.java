@@ -15,9 +15,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import in.dotworld.database.security.CustomUserDetailsService;
 import in.dotworld.database.security.JwtAuthenticationEntryPoint;
 import in.dotworld.database.security.JwtAuthenticationFilter;
+import in.dotworld.database.service.CustomUserDetailsService;
 
 @Configuration
 @EnableWebSecurity

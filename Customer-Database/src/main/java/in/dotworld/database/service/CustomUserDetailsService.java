@@ -1,4 +1,4 @@
-package in.dotworld.database.security;
+package in.dotworld.database.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
