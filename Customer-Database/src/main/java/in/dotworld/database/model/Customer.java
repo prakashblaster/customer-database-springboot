@@ -1,10 +1,8 @@
 package in.dotworld.database.model;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -31,7 +29,7 @@ public class Customer {
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "customer_games", joinColumns = @JoinColumn(name = "customer_id"), inverseJoinColumns = @JoinColumn(name = "game_id"))
-	private Set<Game> game=new HashSet<>();
+	private Set<Game> game = new HashSet<>();
 
 	public Customer() {
 
@@ -41,7 +39,6 @@ public class Customer {
 		super();
 		this.name = name;
 	}
-	
 
 	public Long getCustomer_id() {
 		return customer_id;

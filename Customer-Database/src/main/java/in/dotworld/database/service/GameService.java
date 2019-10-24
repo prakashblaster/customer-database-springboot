@@ -16,13 +16,13 @@ public class GameService {
 	GameRepository gRepository;
 
 	public Game saveGame(GameRequest request) {
-		Game game=new Game(request.getGameName());
+		Game game = new Game(request.getGameName());
 		gRepository.save(game);
 		return gRepository.save(game);
 	}
 
-	public List<Game> getGame() {	
+	public List<Game> getGame() {
 		return gRepository.findAll();
 	}
-	
+
 }

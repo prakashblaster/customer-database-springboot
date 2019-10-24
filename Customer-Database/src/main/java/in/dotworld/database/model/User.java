@@ -22,33 +22,33 @@ import javax.validation.constraints.Size;
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id; 
-	
+	private Long id;
+
 	@NotBlank
 	@Size(max = 45)
 	private String name;
-	
+
 	@NotBlank
 	@Size(max = 15)
 	private String username;
-	
+
 	@NotBlank
 	@Size(max = 45)
 	private String email;
-	
+
 	@NotBlank
 	@Size(max = 100)
 	private String password;
-	
+
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "user_roles",joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns = @JoinColumn(name="user_role"))
-	private Set<Role> roles=new HashSet<>();
+	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "user_role"))
+	private Set<Role> roles = new HashSet<>();
 
 	public User() {
-		
+
 	}
-	
-	public User( String name,  String username,	 String email, String password) {
+
+	public User(String name, String username, String email, String password) {
 		super();
 		this.name = name;
 		this.username = username;
@@ -103,7 +103,5 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-	
-	
-	
+
 }

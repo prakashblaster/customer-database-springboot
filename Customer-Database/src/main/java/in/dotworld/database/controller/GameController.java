@@ -20,15 +20,15 @@ import in.dotworld.database.service.GameService;
 public class GameController {
 	@Autowired
 	GameService service;
-	
+
 	@PostMapping("")
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public Game saveGame(@RequestBody GameRequest request) {
 		return service.saveGame(request);
 	}
-	
+
 	@GetMapping("")
-	public List<Game> viewGame(){
+	public List<Game> viewGame() {
 		return service.getGame();
 	}
 

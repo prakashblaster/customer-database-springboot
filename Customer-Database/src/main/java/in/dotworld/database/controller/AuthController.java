@@ -81,7 +81,7 @@ public class AuthController {
 
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-		Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
+		Role userRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
 				.orElseThrow(() -> new AppException("User Role not set."));
 
 		user.setRoles(Collections.singleton(userRole));
@@ -93,7 +93,7 @@ public class AuthController {
 
 		return ResponseEntity.created(location).body(new SignupResponse(true, "User registered successfully"));
 	}
-	
+
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/users")
 	public List<User> getUsers() {

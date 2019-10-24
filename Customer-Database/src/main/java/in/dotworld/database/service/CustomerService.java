@@ -18,9 +18,9 @@ public class CustomerService {
 
 	public Customer saveCompliant(CustomerRequest request) {
 		UUID uuid = UUID.randomUUID();
-		Customer customer=new Customer(request.getName());
+		Customer customer = new Customer(request.getName());
 		customer.setApi_key(uuid.toString());
-		Customer response=cRepository.save(customer);
+		Customer response = cRepository.save(customer);
 		return response;
 	}
 
@@ -29,15 +29,15 @@ public class CustomerService {
 	}
 
 	public Customer update(CustomerRequest request, Long id) {
-		Customer customer=cRepository.findById(id).get();
+		Customer customer = cRepository.findById(id).get();
 		if (customer != null) {
-			if (request.getName() ==null) {
+			if (request.getName() == null) {
 				customer.getName();
-			}else {
+			} else {
 				customer.setName(request.getName());
 			}
 			cRepository.saveAndFlush(customer);
-		}else {
+		} else {
 			throw new RuntimeException("customer not found");
 		}
 		return customer;
@@ -46,9 +46,25 @@ public class CustomerService {
 	public String deleteCustomer(Long id) {
 		Customer customer = cRepository.findById(id).get();
 		cRepository.delete(customer);
-		
+
 		return "customer deleted successfully";
 	}
-	
+
+	public Customer resetApiKey(Long id) {
+		Customer customer = cRepository.findById(id).get();
+		if (customer != null) {
+			UUID uuid = UUID.randomUUID();
+			customer.setApi_key(uuid.toString());
+			Customer customer2=cRepository.saveAndFlush(customer);
+			return customer2;
+		}else {
+			throw new RuntimeException("customer not found");
+		}
+	}
+
+	public Customer getCustomerById(Long id) {
+		Customer customer=cRepository.findById(id).get();
+		return customer;
+	}
 
 }

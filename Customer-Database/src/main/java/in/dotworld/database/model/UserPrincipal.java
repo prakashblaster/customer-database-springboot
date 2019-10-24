@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
 public class UserPrincipal implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
@@ -24,7 +23,7 @@ public class UserPrincipal implements UserDetails {
 	private String password;
 
 	private Collection<? extends GrantedAuthority> authorities;
-	
+
 	public UserPrincipal(Long id, String name, String username, String email, String password,
 			Collection<? extends GrantedAuthority> authorities) {
 		super();
@@ -35,11 +34,12 @@ public class UserPrincipal implements UserDetails {
 		this.password = password;
 		this.authorities = authorities;
 	}
-	
+
 	public static UserPrincipal create(User user) {
-		List<GrantedAuthority> authorities=user.getRoles().stream()
+		List<GrantedAuthority> authorities = user.getRoles().stream()
 				.map(role -> new SimpleGrantedAuthority(role.getName().name())).collect(Collectors.toList());
-		return new UserPrincipal(user.getId(), user.getName(), user.getUsername(), user.getEmail(), user.getPassword(), authorities);
+		return new UserPrincipal(user.getId(), user.getName(), user.getUsername(), user.getEmail(), user.getPassword(),
+				authorities);
 	}
 
 	public Long getId() {

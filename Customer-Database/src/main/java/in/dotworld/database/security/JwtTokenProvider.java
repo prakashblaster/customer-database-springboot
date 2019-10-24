@@ -1,6 +1,5 @@
 package in.dotworld.database.security;
 
-
 import java.util.Date;
 
 import org.slf4j.Logger;
@@ -20,31 +19,31 @@ import io.jsonwebtoken.UnsupportedJwtException;
 
 @Component
 public class JwtTokenProvider {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
-	
+
 	@Value("${app.jwtSecret}")
 	private String jwtSecret;
-	
+
 	@Value("${app.jwtExpirationInMs}")
 	private int jwtExp;
-	
+
 	public String generateToken(Authentication authentication) {
-		
-		UserPrincipal userPrincipal= (UserPrincipal) authentication.getPrincipal();
-		
-		Date now=new Date();
-		Date expiryDate=new Date(now.getTime()+jwtExp);
-		
-		return Jwts.builder().setSubject(Long.toString(userPrincipal.getId())).setIssuedAt(new Date()).setExpiration(expiryDate)
-				.signWith(SignatureAlgorithm.HS512, jwtSecret).compact();
+
+		UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
+
+		Date now = new Date();
+		Date expiryDate = new Date(now.getTime() + jwtExp);
+
+		return Jwts.builder().setSubject(Long.toString(userPrincipal.getId())).setIssuedAt(new Date())
+				.setExpiration(expiryDate).signWith(SignatureAlgorithm.HS512, jwtSecret).compact();
 	}
-	
+
 	public Long getUserIdFromJWT(String token) {
-		Claims claims=Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
+		Claims claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
 		return Long.parseLong(claims.getSubject());
 	}
-	
+
 	public Boolean validateToken(String authToken) {
 		try {
 			Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);

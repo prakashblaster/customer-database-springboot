@@ -21,36 +21,45 @@ import in.dotworld.database.model.Customer;
 import in.dotworld.database.payload.CustomerRequest;
 import in.dotworld.database.service.CustomerService;
 
-
 @RestController
 @RequestMapping("/customers")
 public class CustomerController {
-	
+
 	@Autowired
 	CustomerService service;
-	
+
 	@PostMapping("")
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public Customer saveCompliant(@RequestBody CustomerRequest customer) {
 		return service.saveCompliant(customer);
 	}
-	
+
 	@GetMapping("")
-	public List<Customer> viewCustomers(){
+	public List<Customer> viewCustomers() {
 		return service.getCustomer();
 	}
 	
+	@GetMapping("/{id}")
+	public Customer viewById(@PathVariable Long id) {
+		return service.getCustomerById(id);
+	}
+
 	@PutMapping("/{id}")
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public Customer updateAll(@Valid @RequestBody CustomerRequest customer, @PathVariable Long id) {
 		return service.update(customer, id);
 
 	}
-	
-	//@PreAuthorize("hasRole('ADMIN')")
+
+	 @PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/{id}")
 	public String deleteCustomer(@PathVariable Long id) {
 		return service.deleteCustomer(id);
 	}
 
+	@PutMapping("/reset/{id}")
+	public Customer resetApi(@PathVariable Long id) {
+		return service.resetApiKey(id);
+		
+	}
 }

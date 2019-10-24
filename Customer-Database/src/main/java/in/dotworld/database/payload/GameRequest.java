@@ -3,7 +3,7 @@ package in.dotworld.database.payload;
 import javax.validation.constraints.NotBlank;
 
 public class GameRequest {
-	
+
 	@NotBlank
 	private String gameName;
 
@@ -15,5 +15,4 @@ public class GameRequest {
 		this.gameName = gameName;
 	}
 
-	
 }
