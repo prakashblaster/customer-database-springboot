@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import in.dotworld.database.model.Game;
+import in.dotworld.database.payload.GameRequest;
 import in.dotworld.database.service.GameService;
 
 @RestController
@@ -22,8 +23,8 @@ public class GameController {
 	
 	@PostMapping("")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public String saveGame(@RequestBody Game game) {
-		return service.saveGame(game);
+	public Game saveGame(@RequestBody GameRequest request) {
+		return service.saveGame(request);
 	}
 	
 	@GetMapping("")

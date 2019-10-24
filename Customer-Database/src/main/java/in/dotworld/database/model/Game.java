@@ -13,10 +13,11 @@ public class Game {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long game_id;
 	
 	@NotBlank
 	private String gameName;
+	
 	
 	public Game() {		
 	}
@@ -26,9 +27,11 @@ public class Game {
 		this.gameName = gameName;
 	}
 
-	public Long getId() {
-		return id;
+
+	public Long getGame_id() {
+		return game_id;
 	}
+
 
 	public String getGameName() {
 		return gameName;

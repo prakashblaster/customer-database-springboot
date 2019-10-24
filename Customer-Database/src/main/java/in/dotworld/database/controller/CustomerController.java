@@ -2,16 +2,23 @@ package in.dotworld.database.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import in.dotworld.database.model.Customer;
+import in.dotworld.database.payload.CustomerRequest;
 import in.dotworld.database.service.CustomerService;
 
 
@@ -24,13 +31,26 @@ public class CustomerController {
 	
 	@PostMapping("")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public String saveCompliant(@RequestBody Customer customer) {
+	public Customer saveCompliant(@RequestBody CustomerRequest customer) {
 		return service.saveCompliant(customer);
 	}
 	
 	@GetMapping("")
 	public List<Customer> viewCustomers(){
 		return service.getCustomer();
+	}
+	
+	@PutMapping("/{id}")
+	@ResponseStatus(value = HttpStatus.CREATED)
+	public Customer updateAll(@Valid @RequestBody CustomerRequest customer, @PathVariable Long id) {
+		return service.update(customer, id);
+
+	}
+	
+	//@PreAuthorize("hasRole('ADMIN')")
+	@DeleteMapping("/{id}")
+	public String deleteCustomer(@PathVariable Long id) {
+		return service.deleteCustomer(id);
 	}
 
 }
