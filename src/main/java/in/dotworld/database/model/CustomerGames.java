@@ -6,45 +6,48 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table(name = "customer_games1")
 public class CustomerGames {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@GeneratedValue(generator = "system-uuid")
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	private String id;
 
-	private Long customer_id;
+	private String customer_id;
 
-	private Long game_id;
+	private String game_id;
 
 	public CustomerGames() {
 
 	}
 
-	public CustomerGames(Long customer_id, Long game_id) {
+	public CustomerGames(String customer_id, String game_id) {
 		super();
 		this.customer_id = customer_id;
 		this.game_id = game_id;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public Long getCustomer_id() {
+	public String getCustomer_id() {
 		return customer_id;
 	}
 
-	public void setCustomer_id(Long customer_id) {
+	public void setCustomer_id(String customer_id) {
 		this.customer_id = customer_id;
 	}
 
-	public Long getGame_id() {
+	public String getGame_id() {
 		return game_id;
 	}
 
-	public void setGame_id(Long game_id) {
+	public void setGame_id(String game_id) {
 		this.game_id = game_id;
 	}
 

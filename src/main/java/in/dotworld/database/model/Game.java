@@ -7,13 +7,16 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table(name = "games")
 public class Game {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long game_id;
+	@GeneratedValue(generator = "system-uuid")
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	private String game_id;
 
 	@NotBlank
 	private String gameName;
@@ -26,7 +29,7 @@ public class Game {
 		this.gameName = gameName;
 	}
 
-	public Long getGame_id() {
+	public String getGame_id() {
 		return game_id;
 	}
 

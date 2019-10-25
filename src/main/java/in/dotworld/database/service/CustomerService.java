@@ -28,7 +28,7 @@ public class CustomerService {
 		return cRepository.findAll();
 	}
 
-	public Customer update(CustomerRequest request, Long id) {
+	public Customer update(CustomerRequest request, String id) {
 		Customer customer = cRepository.findById(id).get();
 		if (customer != null) {
 			if (request.getName() == null) {
@@ -43,14 +43,14 @@ public class CustomerService {
 		return customer;
 	}
 
-	public String deleteCustomer(Long id) {
+	public String deleteCustomer(String id) {
 		Customer customer = cRepository.findById(id).get();
 		cRepository.delete(customer);
 
 		return "customer deleted successfully";
 	}
 
-	public Customer resetApiKey(Long id) {
+	public Customer resetApiKey(String id) {
 		Customer customer = cRepository.findById(id).get();
 		if (customer != null) {
 			UUID uuid = UUID.randomUUID();
@@ -62,7 +62,7 @@ public class CustomerService {
 		}
 	}
 
-	public Customer getCustomerById(Long id) {
+	public Customer getCustomerById(String id) {
 		Customer customer=cRepository.findById(id).get();
 		return customer;
 	}

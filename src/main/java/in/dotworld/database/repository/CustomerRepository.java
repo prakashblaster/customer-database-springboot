@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import in.dotworld.database.model.Customer;
 
 @Repository
-public interface CustomerRepository extends JpaRepository<Customer, Long> {
+public interface CustomerRepository extends JpaRepository<Customer, String> {
 
 }

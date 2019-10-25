@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import in.dotworld.database.model.Game;
 
 @Repository
-public interface GameRepository extends JpaRepository<Game, Long>{
+public interface GameRepository extends JpaRepository<Game, String>{
 
 }

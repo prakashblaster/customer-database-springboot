@@ -14,13 +14,15 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table(name = "customers")
 public class Customer {
-
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long customer_id;
+	@GeneratedValue(generator = "system-uuid")
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	private String customer_id;
 
 	@NotBlank
 	private String name;
@@ -40,7 +42,7 @@ public class Customer {
 		this.name = name;
 	}
 
-	public Long getCustomer_id() {
+	public String getCustomer_id() {
 		return customer_id;
 	}
 

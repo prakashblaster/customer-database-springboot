@@ -25,4 +25,20 @@ public class GameService {
 		return gRepository.findAll();
 	}
 
+	public Game gameById(String game_id) {
+		Game game=gRepository.findById(game_id).get();
+		return game;
+	}
+	
+	public List<Game> deleteGame(String id) {
+		Game game=gRepository.findById(id).get();
+		gRepository.delete(game);
+		return gRepository.findAll();
+	}
+
+	public Game update(String id) {
+		Game game = gRepository.findById(id).get();
+		return gRepository.saveAndFlush(game);
+	}
+
 }

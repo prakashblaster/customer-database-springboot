@@ -40,25 +40,25 @@ public class CustomerController {
 	}
 	
 	@GetMapping("/{id}")
-	public Customer viewById(@PathVariable Long id) {
+	public Customer viewById(@PathVariable String id) {
 		return service.getCustomerById(id);
 	}
 
 	@PutMapping("/{id}")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public Customer updateAll(@Valid @RequestBody CustomerRequest customer, @PathVariable Long id) {
+	public Customer updateAll(@Valid @RequestBody CustomerRequest customer, @PathVariable String id) {
 		return service.update(customer, id);
 
 	}
 
 	 @PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/{id}")
-	public String deleteCustomer(@PathVariable Long id) {
+	public String deleteCustomer(@PathVariable String id) {
 		return service.deleteCustomer(id);
 	}
 
-	@PutMapping("/reset/{id}")
-	public Customer resetApi(@PathVariable Long id) {
+	@PutMapping("/refresh/api/{id}")
+	public Customer resetApi(@PathVariable String id) {
 		return service.resetApiKey(id);
 		
 	}

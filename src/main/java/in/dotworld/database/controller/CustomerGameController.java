@@ -35,21 +35,6 @@ public class CustomerGameController {
 	@Autowired
 	CustomerGamesDetailsRepository details;
 
-//	@GetMapping("customers/{customer_id}/games/{game_id}")
-//	public Customer getCustomerAndGame(@PathVariable Long customer_id, @PathVariable Long game_id) {
-//		Customer customer = cRepository.findById(customer_id).get();
-//		Game game = gRepository.findById(game_id).get();
-//		CustomerGames customerGames = new CustomerGames(customer_id, game_id);
-//		if (customer == null || game == null) {
-//			throw new RuntimeException("customer or game not found");
-//		} else {
-//			customer.getGame().add(game);
-//			cRepository.save(customer);
-//			cgRepository.save(customerGames);
-//			return customer;
-//		}
-//
-//	}
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/customers/games")
 	public CustomerGames gameAccess(@RequestBody CustomerGamesRequest request) {
