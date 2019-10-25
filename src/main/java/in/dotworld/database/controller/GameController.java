@@ -47,7 +47,7 @@ public class GameController {
 	}
 
 	@PatchMapping("/{id}")
-	public Game updateGame(@PathVariable String id) {
-		return service.update(id);
+	public Game updateGame(@RequestBody Game game,@PathVariable String id) {
+		return service.update(id,game);
 	}
 }

@@ -17,9 +17,8 @@ public class CustomerService {
 	CustomerRepository cRepository;
 
 	public Customer saveCompliant(CustomerRequest request) {
-		UUID uuid = UUID.randomUUID();
 		Customer customer = new Customer(request.getName());
-		customer.setApi_key(uuid.toString());
+		customer.setApi_key(getAlphaNumericString(25));
 		Customer response = cRepository.save(customer);
 		return response;
 	}
@@ -43,28 +42,40 @@ public class CustomerService {
 		return customer;
 	}
 
-	public String deleteCustomer(String id) {
+	public List<Customer> deleteCustomer(String id) {
 		Customer customer = cRepository.findById(id).get();
 		cRepository.delete(customer);
 
-		return "customer deleted successfully";
+		return cRepository.findAll();
 	}
 
 	public Customer resetApiKey(String id) {
 		Customer customer = cRepository.findById(id).get();
 		if (customer != null) {
-			UUID uuid = UUID.randomUUID();
-			customer.setApi_key(uuid.toString());
-			Customer customer2=cRepository.saveAndFlush(customer);
+			customer.setApi_key(getAlphaNumericString(25));
+			Customer customer2 = cRepository.saveAndFlush(customer);
 			return customer2;
-		}else {
+		} else {
 			throw new RuntimeException("customer not found");
 		}
 	}
 
 	public Customer getCustomerById(String id) {
-		Customer customer=cRepository.findById(id).get();
+		Customer customer = cRepository.findById(id).get();
 		return customer;
+	}
+
+	static String getAlphaNumericString(int n) {
+		String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789" + "abcdefghijklmnopqrstuvxyz";
+		StringBuilder sb = new StringBuilder(n);
+
+		for (int i = 0; i < n; i++) {
+
+			int index = (int) (AlphaNumericString.length() * Math.random());
+			sb.append(AlphaNumericString.charAt(index));
+		}
+
+		return sb.toString();
 	}
 
 }

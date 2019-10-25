@@ -36,8 +36,9 @@ public class GameService {
 		return gRepository.findAll();
 	}
 
-	public Game update(String id) {
+	public Game update(String id,Game request) {
 		Game game = gRepository.findById(id).get();
+		game.setGameName(request.getGameName());
 		return gRepository.saveAndFlush(game);
 	}
 
